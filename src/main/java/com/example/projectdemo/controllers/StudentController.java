@@ -27,7 +27,7 @@ public class StudentController {
     }
 
     @GetMapping("/getAll")
-    public List<Student> getAll(@RequestParam("Student_photo") MultipartFile Student_photo)
+    public List<Student> getAll()
     {
         return repository.findAll();
     }
