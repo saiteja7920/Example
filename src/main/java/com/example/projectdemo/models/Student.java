@@ -4,6 +4,9 @@ import org.hibernate.annotations.Type;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Student {
@@ -16,8 +19,11 @@ public class Student {
     private String email;
     @NonNull
     private String branch;
-    private String mobile_num;
+    @Column(unique = true)
+    public String mobile_num;
+    @Column(unique = true)
     private String pan_num;
+    @Column(unique = true)
     private String Aadhar_num;
 
     public Student(){
@@ -35,12 +41,15 @@ public class Student {
         this.mobile_num = mobile_num;
         this.pan_num = pan_num;
         Aadhar_num = aadhar_num;
-        this.address = address;
+        //this.address = address;
         Student_photo = student_photo;
     }
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "student")
-    private Address address;
+   // @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "student")
+    //private Address address;
+   @OneToMany(targetEntity = Address.class, cascade = CascadeType.ALL)
+   @JoinColumn(name = "student_id", referencedColumnName = "id")
+   private List<Address> addresses;
 
     @Lob
     @Type(type = "org.hibernate.type.BinaryType")

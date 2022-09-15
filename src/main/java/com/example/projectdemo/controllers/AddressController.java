@@ -1,8 +1,8 @@
 package com.example.projectdemo.controllers;
 
 import com.example.projectdemo.models.Address;
-import com.example.projectdemo.models.Student;
 import com.example.projectdemo.repositories.AddressRepository;
+import com.example.projectdemo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +15,8 @@ public class AddressController {
 
     @Autowired
     private AddressRepository repository;
+    //@Autowired
+    //private StudentRepository sturepo;
 
     @GetMapping("/getAllAddress")
     public List<Address> getAll(){
@@ -31,7 +33,7 @@ public class AddressController {
    @PostMapping("/createAddress")
     public String createAddress(@RequestBody Address address){
        // address.setStudent(new Student(address.));
-        repository.save(address);
+       repository.save(address);
         return "Address added";
    }
 

@@ -1,11 +1,12 @@
 package com.example.projectdemo.controllers;
 
-import com.example.projectdemo.models.Address;
 import com.example.projectdemo.models.Student;
-import com.example.projectdemo.repositories.AddressRepository;
 import com.example.projectdemo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.Collections;
@@ -26,9 +27,16 @@ public class StudentController {
     }
 
     @GetMapping("/getAll")
-    public List<Student> getAll(){
+    public List<Student> getAll(@RequestParam("Student_photo") MultipartFile Student_photo)
+    {
         return repository.findAll();
     }
+
+
+   /** @GetMapping("/getBy/mobile_num")
+    public ResponseEntity<List<Student>> getByMobile_num(@RequestParam String mobile_num) {
+        return new ResponseEntity<List<Student>>(repository.findByMobile_num(mobile_num), HttpStatus.OK);
+    }*/
 
     @GetMapping("/get/{id}")
     public Object getById(@PathVariable int id) {
