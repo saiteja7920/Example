@@ -37,7 +37,7 @@ public class StudentController {
         if (!srepository.findByMobile(mobile).equals(Optional.empty())) {
             return new ResponseEntity<List<Student>>(srepository.findByMobile(mobile), HttpStatus.OK);
         }
-        return  null;
+        return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/get/{id}")

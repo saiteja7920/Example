@@ -5,6 +5,8 @@ import com.example.projectdemo.models.Student;
 import com.example.projectdemo.repositories.AddressRepository;
 import com.example.projectdemo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +45,16 @@ public class AddressController {
        }
        return "Id Not Found";
    }
+
+   @GetMapping("/getAddressByStudentId/{id}")
+   public ResponseEntity<List<Address>> getAllAddressByStudentId(@PathVariable(value = "id") Integer id){
+        if(!srepository.existsById(id)){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        List<Address> addresses = repository.findByStudentId(id);
+        return new ResponseEntity<>(addresses, HttpStatus.OK);
+   }
+
 
    @PostMapping("/createAddress")
     public String createAddress(@RequestBody Address address,@RequestHeader Integer Student_Id){
