@@ -46,8 +46,8 @@ public class AddressController {
        return "Id Not Found";
    }
 
-   @GetMapping("/getAddressByStudentId/{id}")
-   public ResponseEntity<List<Address>> getAllAddressByStudentId(@PathVariable(value = "id") Integer id){
+   @GetMapping("/getAddressByStudentId")
+   public ResponseEntity<List<Address>> getAllAddressByStudentId(@RequestHeader Integer id){
         if(!srepository.existsById(id)){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
