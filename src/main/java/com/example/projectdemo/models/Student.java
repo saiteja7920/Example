@@ -5,6 +5,7 @@ import com.vladmihalcea.hibernate.type.json.JsonType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.lang.NonNull;
+import org.w3c.dom.Text;
 
 import javax.persistence.*;
 import java.util.List;

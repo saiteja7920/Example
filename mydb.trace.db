@@ -1,0 +1,113 @@
+2022-09-19 10:38:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-09-19 10:45:37 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LEN" not found; SQL statement:
+SELECT MAX(LEN(STUDENT_PHOTO)) FROM STUDENT [90022-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.readFunction(Parser.java:3847)
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5211)
+	at org.h2.command.Parser.readTerm(Parser.java:4901)
+	at org.h2.command.Parser.readFactor(Parser.java:3398)
+	at org.h2.command.Parser.readSum(Parser.java:3385)
+	at org.h2.command.Parser.readConcat(Parser.java:3350)
+	at org.h2.command.Parser.readCondition(Parser.java:3132)
+	at org.h2.command.Parser.readExpression(Parser.java:3053)
+	at org.h2.command.Parser.readAggregate(Parser.java:3583)
+	at org.h2.command.Parser.readFunction(Parser.java:3827)
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5211)
+	at org.h2.command.Parser.readTerm(Parser.java:4901)
+	at org.h2.command.Parser.readFactor(Parser.java:3398)
+	at org.h2.command.Parser.readSum(Parser.java:3385)
+	at org.h2.command.Parser.readConcat(Parser.java:3350)
+	at org.h2.command.Parser.readCondition(Parser.java:3132)
+	at org.h2.command.Parser.readExpression(Parser.java:3053)
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2853)
+	at org.h2.command.Parser.parseSelect(Parser.java:2871)
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2762)
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2633)
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2612)
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2605)
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2598)
+	at org.h2.command.Parser.parseQuery(Parser.java:2567)
+	at org.h2.command.Parser.parsePrepared(Parser.java:724)
+	at org.h2.command.Parser.parse(Parser.java:689)
+	at org.h2.command.Parser.parse(Parser.java:661)
+	at org.h2.command.Parser.prepareCommand(Parser.java:569)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:631)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:554)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
+	at org.h2.server.web.WebApp.query(WebApp.java:1137)
+	at org.h2.server.web.WebApp.query(WebApp.java:1113)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.WebServlet.doGet(WebServlet.java:129)
+	at org.h2.server.web.WebServlet.doPost(WebServlet.java:166)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2022-09-19 10:49:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-09-19 10:50:33 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT MAX(LENGTH(STUDENT [*]_PHOTO)) FROM STUDENT"; expected "(, ., [, ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, )"; SQL statement:
+SELECT MAX(LENGTH(STUDENT _PHOTO)) FROM STUDENT [42001-214]
+2022-09-19 10:50:56 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]STUDENT"; expected "SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+STUDENT [42001-214]
+2022-09-19 10:56:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-09-19 11:09:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-09-19 11:10:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-09-19 11:13:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-09-19 11:19:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-09-19 11:20:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "STUDENT_PHOTO BINARY VARYING(255)": "X'203235352c3231362c3235352c3232342c302c31362c37342c37302c37332c37302c302c312c31... (183992)"; SQL statement:
+insert into student (id, aadhar_num, branch, email, mobile, name, pan_num, student_photo) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
