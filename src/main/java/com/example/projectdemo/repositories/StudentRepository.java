@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
-    //List<Student> findByMobile_num(String mobile_num);
+    List<Student> findByMobile(String mobile);
 
 }

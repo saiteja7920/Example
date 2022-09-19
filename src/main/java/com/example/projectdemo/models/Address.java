@@ -1,9 +1,8 @@
 package com.example.projectdemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Address {
@@ -15,6 +14,12 @@ public class Address {
     private String State;
     private String Country;
     private String Pincode;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name= "studentId")
+     private Student student;
+
 
     public Address(){
 
@@ -28,9 +33,6 @@ public class Address {
         Pincode = pincode;
     }
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "Student_Id")
-    private Student student;
 
     public int getId() {
         return Id;
