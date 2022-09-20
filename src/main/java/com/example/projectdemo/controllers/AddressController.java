@@ -48,6 +48,13 @@ public class AddressController {
        return "Id Not Found";
    }
 
+    @PostMapping("/createAddress")
+    public String createAddress(@RequestBody Address address, @RequestHeader Integer Student_Id){
+        address.setStudent(new Student(Student_Id));
+        repository.save(address);
+        return "Address added";
+    }
+
    @GetMapping("/getAddressByStudentId")
    public ResponseEntity<Address> getAllAddressByStudentId(@RequestHeader Integer id,@RequestHeader String addressType){
         if(!srepository.existsById(id)){
@@ -63,13 +70,24 @@ public class AddressController {
         //return new ResponseEntity<>(addresses, HttpStatus.OK);
    }
 
-
-   @PostMapping("/createAddress")
-    public String createAddress(@RequestBody Address address, @RequestHeader Integer Student_Id){
-        address.setStudent(new Student(Student_Id));
-       repository.save(address);
-        return "Address added";
-   }
+    @PutMapping("/updateAddressByStudentId")
+    public ResponseEntity<Address>  getAllAddressByStudentId(@RequestBody Address address,@RequestHeader Integer id,@RequestHeader String addressType){
+        if(!srepository.existsById(id)){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        List<Address> addresses = repository.findByStudentId(id);
+        for (int i=0; i< addresses.size(); i++){
+            if(addresses.get(i).getAddressType().toString().compareTo(addressType)==0){
+                addresses.get(i).setStreet(address.getStreet());
+                addresses.get(i).setCity(address.getCity());
+                addresses.get(i).setState(address.getState());
+                addresses.get(i).setCountry(address.getCountry());
+                repository.saveAll(addresses);
+                return new ResponseEntity<>(addresses.get(i), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     @PutMapping("/updateAddress")
     public String getById(@RequestBody Address address,@RequestHeader Integer id){
