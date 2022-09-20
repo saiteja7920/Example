@@ -15,6 +15,9 @@ public class Address {
     private String Country;
     private String Pincode;
 
+    @Enumerated(EnumType.STRING)
+    private AddressType addressType;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name= "studentId")
@@ -25,12 +28,13 @@ public class Address {
 
     }
 
-    public Address(String street, String city, String state, String country, String pincode) {
+    public Address(String street, String city, String state, String country, String pincode, AddressType addresstype) {
         Street = street;
         City = city;
         State = state;
         Country = country;
         Pincode = pincode;
+        addressType = addresstype;
     }
 
 
@@ -89,5 +93,13 @@ public class Address {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public AddressType getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
     }
 }

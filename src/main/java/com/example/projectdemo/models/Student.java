@@ -1,14 +1,15 @@
 package com.example.projectdemo.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.lang.NonNull;
-import org.w3c.dom.Text;
+
 
 import javax.persistence.*;
 import java.util.List;
+import javax.validation.constraints.Email;
 
 @Entity
 @TypeDef(
@@ -23,6 +24,7 @@ public class Student {
     @NonNull
     private String name;
     @NonNull
+    @Email(regexp = "[a-z0-9._%+-]+\\@[a-z0-9.-]+\\.[a-z]{2,3}")
     private String email;
     @NonNull
     private String branch;
@@ -35,6 +37,7 @@ public class Student {
 
     @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER,mappedBy = "student")
     private List<Address> addressList;
+
 
     public Student(){
 

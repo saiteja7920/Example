@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface AddressRepository extends JpaRepository<Address, Integer> {
     List<Address> findByStudentId(Integer id);
-    //List<Address> findByStudentId(int studentId);
+
 }

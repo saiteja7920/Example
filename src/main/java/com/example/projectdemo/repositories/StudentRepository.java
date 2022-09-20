@@ -1,5 +1,6 @@
 package com.example.projectdemo.repositories;
 
+import com.example.projectdemo.models.Address;
 import com.example.projectdemo.models.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
