@@ -82,6 +82,7 @@ public class AddressController {
                 addresses.get(i).setCity(address.getCity());
                 addresses.get(i).setState(address.getState());
                 addresses.get(i).setCountry(address.getCountry());
+                addresses.get(i).setPincode(address.getPincode());
                 repository.saveAll(addresses);
                 return new ResponseEntity<>(addresses.get(i), HttpStatus.OK);
             }
