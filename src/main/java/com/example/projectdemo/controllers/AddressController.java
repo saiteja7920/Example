@@ -34,10 +34,12 @@ public class AddressController {
         this.srepository = srepository;
     }
 
+
     @GetMapping("/getAllAddress")
     public List<Address> getAll(){
         return repository.findAll();
     }
+
    @GetMapping("/getAddress/{Address_Id}")
    public Object getById(@PathVariable int Address_Id) {
        if (!repository.findById(Address_Id).equals(Optional.empty())) {
