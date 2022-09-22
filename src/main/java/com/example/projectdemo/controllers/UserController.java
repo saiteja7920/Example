@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
     @Autowired
@@ -78,14 +79,24 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestHeader String userName, @RequestHeader String password) {
         List<UserTable> users = userRepository.findByUserName(userName);
-        for (int j = 0; j < users.size(); j++)
-        {
-            if (users.get(j).getUserName().compareTo(userName) == 0 && users.get(j).getPassword().compareTo(password) == 0)
-            {
-                return new ResponseEntity<>("User logged in successfully",HttpStatus.OK);
+        for (int j = 0; j < users.size(); j++) {
+            if (users.get(j).getUserName().compareTo(userName) == 0 && users.get(j).getPassword().compareTo(password) == 0) {
+                return new ResponseEntity<>("User logged in successfully", HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>("User login Failed",HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("User login Failed", HttpStatus.BAD_REQUEST);
     }
+
+//    @PostMapping("/changePassword")
+//    public ResponseEntity<String> changePassword(@RequestHeader String userName, @RequestHeader String password,@RequestHeader String newPassword) {
+//        List<UserTable> users = userRepository.findByUserName(userName);
+//        for (int i = 0; i < users.size(); i++) {
+//            if (users.get(i).getUserName().compareTo(userName) == 0 && users.get(j).getPassword().compareTo(password) == 0) {
+//                return new ResponseEntity<>("User logged in successfully", HttpStatus.OK);
+//            }
+//        }
+//        return new ResponseEntity<>("User login Failed", HttpStatus.BAD_REQUEST);
+//    }
+
 }
 
