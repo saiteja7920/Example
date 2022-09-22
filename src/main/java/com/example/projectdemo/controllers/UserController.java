@@ -20,6 +20,7 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    private String newPassword;
 
     @PostMapping("/addUser")
     public String createStudent(@RequestBody UserTable userTable) {
@@ -87,16 +88,17 @@ public class UserController {
         return new ResponseEntity<>("User login Failed", HttpStatus.BAD_REQUEST);
     }
 
-//    @PostMapping("/changePassword")
-//    public ResponseEntity<String> changePassword(@RequestHeader String userName, @RequestHeader String password,@RequestHeader String newPassword) {
-//        List<UserTable> users = userRepository.findByUserName(userName);
-//        for (int i = 0; i < users.size(); i++) {
-//            if (users.get(i).getUserName().compareTo(userName) == 0 && users.get(j).getPassword().compareTo(password) == 0) {
-//                return new ResponseEntity<>("User logged in successfully", HttpStatus.OK);
-//            }
-//        }
-//        return new ResponseEntity<>("User login Failed", HttpStatus.BAD_REQUEST);
-//    }
+    @PostMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestHeader String userName, @RequestHeader String password,@RequestHeader String newPassword) {
+        UserTable users = userRepository.findByUserNameIgnoreCase(userName);
+            if (users.getUserName().compareTo(userName) == 0 && users.getPassword().compareTo(password) == 0) {
+               UserTable us = userRepository.findByUserNameIgnoreCase(userName);
+               us.setPassword(newPassword);
+               userRepository.save(us);
+               return new ResponseEntity<>("Password changed successfully", HttpStatus.OK);
+            }
+        return new ResponseEntity<>("Invalid Credentials", HttpStatus.BAD_REQUEST);
+    }
 
 }
 
