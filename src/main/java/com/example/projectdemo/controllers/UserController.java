@@ -81,24 +81,42 @@ public class UserController {
     public ResponseEntity<String> login(@RequestHeader String userName, @RequestHeader String password) {
         List<UserTable> users = userRepository.findByUserName(userName);
         for (int j = 0; j < users.size(); j++) {
-            if (users.get(j).getUserName().compareTo(userName) == 0 && users.get(j).getPassword().compareTo(password) == 0) {
-                return new ResponseEntity<>("User logged in successfully", HttpStatus.OK);
+            if(users.get(j).getStatus().compareTo(Status.ACTIVE)==0) {
+                if (users.get(j).getUserName().compareTo(userName) == 0 && users.get(j).getPassword().compareTo(password) == 0) {
+                    return new ResponseEntity<>("User logged in successfully", HttpStatus.OK);
+                }
             }
+            return new ResponseEntity<>("Inactive User ", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("User login Failed", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/changePassword")
-    public ResponseEntity<String> changePassword(@RequestHeader String userName, @RequestHeader String password,@RequestHeader String newPassword) {
+    public ResponseEntity<String> changePassword(@RequestHeader String userName, @RequestHeader String password,@RequestHeader String newPassword,@RequestHeader String reEnterNewPassword) {
         UserTable users = userRepository.findByUserNameIgnoreCase(userName);
             if (users.getUserName().compareTo(userName) == 0 && users.getPassword().compareTo(password) == 0) {
                UserTable us = userRepository.findByUserNameIgnoreCase(userName);
                us.setPassword(newPassword);
-               userRepository.save(us);
-               return new ResponseEntity<>("Password changed successfully", HttpStatus.OK);
+               us.setPassword(reEnterNewPassword);
+               if(newPassword.equals(reEnterNewPassword)){
+                   userRepository.save(us);
+                   return new ResponseEntity<>("Password changed successfully", HttpStatus.OK);
+               }
+                return new ResponseEntity<>("Password Mismatch ", HttpStatus.BAD_REQUEST);
             }
         return new ResponseEntity<>("Invalid Credentials", HttpStatus.BAD_REQUEST);
     }
 
 }
 
+//    @PostMapping("/changePassword")
+//    public ResponseEntity<String> changePassword(@RequestHeader String userName, @RequestHeader String password,@RequestHeader String newPassword) {
+//        UserTable users = userRepository.findByUserNameIgnoreCase(userName);
+//        if (users.getUserName().compareTo(userName) == 0 && users.getPassword().compareTo(password) == 0) {
+//            UserTable us = userRepository.findByUserNameIgnoreCase(userName);
+//            us.setPassword(newPassword);
+//            userRepository.save(us);
+//            return new ResponseEntity<>("Password changed successfully", HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>("Invalid Credentials", HttpStatus.BAD_REQUEST);
+//    }
