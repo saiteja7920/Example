@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class StudentController {
     private StudentRepository srepository;
 
     @PostMapping("/createStudent")
-    public  String createStudent(@RequestBody Student student){
+    public  String createStudent(@Valid @RequestBody Student student){
         srepository.save(student);
         return "Student registered";
     }

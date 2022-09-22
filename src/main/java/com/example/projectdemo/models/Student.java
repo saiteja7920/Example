@@ -6,10 +6,11 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.lang.NonNull;
 
-
 import javax.persistence.*;
 import java.util.List;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+
 
 @Entity
 @TypeDef(
@@ -24,15 +25,19 @@ public class Student {
     @NonNull
     private String name;
     @NonNull
-    @Email(regexp = "[a-z0-9._%+-]+\\@[a-z0-9.-]+\\.[a-z]{2,3}")
+    //@Email
+    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
     private String email;
     @NonNull
     private String branch;
     @Column(unique = true)
+    @Pattern(regexp = "^[6-9]{1}[0-9]{9}$")
     public String mobile;
     @Column(unique = true)
+    @Pattern(regexp = "^[A-Z]{5}[0-9]{4}[A-Z]{1}$")
     private String panNum;
     @Column(unique = true)
+    @Pattern(regexp = "^[1-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$")
     private String aadharNum;
 
     @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER,mappedBy = "student")
@@ -58,13 +63,6 @@ public class Student {
         this.studentPhoto = studentPhoto;
     }
 
-//   @OneToMany(targetEntity = Address.class, cascade = CascadeType.ALL)
-//   @JoinColumn(name = "Student_Id", referencedColumnName = "id")
-//   private List<Address> address;
-
-    //@Lob
-    //@Type(type = "org.hibernate.type.BinaryType")
-    //@Type(type = "org")
     @Type(type = "json")
     @Column(columnDefinition = "json")
     private String studentPhoto;
